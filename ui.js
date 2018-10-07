@@ -4,7 +4,7 @@
     getById: id => document.getElementById(id),
     on: (element, event, fn) => element.addEventListener(event, fn),
   };
-  
+
   // DOM Collections.
   const checkboxElements = [
     'drawRadius', 'drawXAxis', 'drawYAxis',
@@ -27,11 +27,11 @@
   ];
 
   const $el = {};
-  
+
   // Collect all elements.
   elements.forEach(id => $el[id] = DOM.getById(id))
 
-  // 
+  //
   const createControlCluster = (
     key,
     collection,
@@ -62,18 +62,18 @@
       }
 
       if (labelEl) {
-        labelEl.innerText = typeof label === 'function' ? 
-          label(value, key) : `${key} (${value})`;  
+        labelEl.innerText = typeof label === 'function' ?
+          label(value, key) : `${key} (${value})`;
       }
     };
-  
+
     const getAndSetValue = () => {
       let initialValue = tp[collection][key];
 
       if (typeof toFixed !== 'undefined') {
         initialValue = initialValue.toFixed(toFixed)
       }
-      
+
       eventListener({ target: { value: initialValue } }, true);
 
       if (updateOnEveryFrame) {
@@ -113,10 +113,17 @@
     value => `step by frame (${value}deg)`
   );
 
-  DOM.on($el.togglePlay, 'click', () => {
+  const togglePlay = () => {
     tp.togglePlay();
     $el.togglePlay.innerText = tp.config.play ? 'Stop' : 'Start';
-  });
+  }
+
+  DOM.on($el.togglePlay, 'click', togglePlay);
+  window.addEventListener('keypress', (e) => {
+    if (e.code === "Space") {
+      togglePlay();
+    }
+  })
 
   const updateStateValues = () => {
     const sin = +tp.state.sin.toFixed(3);

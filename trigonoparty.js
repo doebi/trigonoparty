@@ -57,7 +57,7 @@
   const resize = () => {
     const width = canvasWrapper.clientWidth;
     const height = canvasWrapper.clientHeight;
-    
+
     if (canvas.width !== width || canvas.height !== height) {
       canvas.width = width;
       canvas.height = height;
@@ -68,7 +68,7 @@
   /**
    * Consts
    */
-  const tPI = 2 * Math.PI; 
+  const tPI = 2 * Math.PI;
   const COLORS = {
     white: '#fff',
     snow: '#fafafa',
@@ -166,7 +166,7 @@
       lastFPSUpdateTime = now;
       FPS = (1000 / (now - lastDrawTime)).toFixed(0);
     }
-    
+
     lastDrawTime = now;
 
     return FPS;
@@ -209,7 +209,7 @@
     const tanOfCoDegree = Math.tan(degToRad(coDegree));
     const tanDistance = sinHeight / tanOfCoDegree;
     const cotDistance = cosWidth / (1 / tanOfCoDegree);
-    
+
     // Calculate tangent and cotangent start/end positions.
     const tanX = evenQuad ? (lineX + tanDistance) : (lineX - tanDistance);
     const cotY = evenQuad ? (lineY - cotDistance) : (lineY + cotDistance);
@@ -217,12 +217,12 @@
     // Clear canvas.
     ctx.fillStyle = COLORS.white;
     ctx.fillRect(0, 0, w, h);
-    
+
     // Draw main circle.
     $drawCircle(x, y, r, { color: COLORS.gray });
     // Draw core main filled circle.
     $drawCircle(x, y, 20, { color: COLORS.snow, fill: true });
-    
+
     // Draw X Axis
     config.draw.xAxis && $drawLine(0, y, w, y, { color: COLORS.gray });
     // Draw Y Axis
@@ -314,9 +314,9 @@
     if (adjacent < 0) {
       degree += 180;
     }
-    
+
     state.degree = degree;
-    
+
     // Force draw to avoid glitches!
     draw(true);
   };
